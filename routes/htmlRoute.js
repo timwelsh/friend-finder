@@ -7,12 +7,14 @@ module.exports = function(app) {
 
     app.get("/survey", function(req, res) {
         res.sendFile(path.join(__dirname, "../public/survey.html"));
-    })
+    });
+
 
     //If no matching routes go to default of home
     app.get("*", function(req, res) {
-        res.sendFile(path.join(__dirname, "../public/home.html");)
-    })
+        res.sendFile(path.join(__dirname, "../public/home.html"))
+    });
+
 }
 
 // applicationCache.get("/tables", funciton(req, res) {

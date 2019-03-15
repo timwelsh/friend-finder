@@ -16,11 +16,10 @@
 // Once you've found the current user's most compatible friend, display the result as a modal pop-up.
 
 // The modal should display both the name and picture of the closest match.
-
-{
-    "name":"Ahmed",
-    "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
-    "scores":[
+const friendData = {
+    name: "Ahmed",
+    photo: "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    scores: [
         5,
         1,
         4,
@@ -32,5 +31,7 @@
         4,
         1
       ]
-  }
+  };
+
+  module.exports = friendData;
   
