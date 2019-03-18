@@ -13,12 +13,13 @@
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h3 class="modal-title">Best Match:</h3>
+                <h3 class="modal-title">Shakespearean Best Match:</h3>
                 <hr>
                 </div>
                 <div class="modal-body">
                     <h4 id="matchName"></h4>
                     <img class="img-fluid" src="" id="matchImage">
+                    <h5 id="matchDesc"></h5>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeButton">Close</button>
@@ -134,24 +135,25 @@
         </div> <!-- end container -->
 
         <script>
-            $("#submitBtn").on("click", function(event){
-                event.preventDefault();
-                const newSubmission = {
-                    name: $("#name").val().trim(),
-                    image: $("#image").val().trim(),
-                    q1: $("input[name=q1]:checked").val(),
-                    q2: $("input[name=q2]:checked").val(),
-                    q3: $("input[name=q3]:checked").val(),
-                    q4: $("input[name=q4]:checked").val(),
-                    q5: $("input[name=q5]:checked").val(),
-                    q6: $("input[name=q6]:checked").val(),
-                    q7: $("input[name=q7]:checked").val()
-                };
-                console.log(newSubmission);
-                $.post("/api/friends",newSubmission,function(data) {
-                    console.log(data);
-                    $("#matchName").text(data.matchName);
-                    $("#matchImage").attr("src",data.matchPhoto);
+            $("#submitBtn").on("click", function(event) {
+              event.preventDefault();
+              let newCharacter = {
+                name: $("#name").val().trim(),
+                image: $("#image").val().trim(),
+                q1: $("#q1").val(),
+                q2: $("#q2").val(),
+                q3: $("#q3").val(),
+                q4: $("#q4").val(),
+                q5: $("#q5").val(),
+                q6: $("#q6").val(),
+                q7: $("#q7").val()
+              }
+                console.log(newCharacter);
+                $.post("/api/friends", newCharacter, function(data) {
+                    console.log(data[0]);
+                    $("#matchName").text(data[0].name);
+                    $("#matchImage").attr("src", data[0].photo);
+                    $("#matchDesc").text(data[0].desc);
                     $("#matchModal").modal(); 
                 });
             });
