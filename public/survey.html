@@ -1,13 +1,160 @@
 <!DOCTYPE html>
 <html>
-    <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
     <head>
-        <title>Survey</title>
+        <title>Shakespearean Friend Finder</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </head>
     <body>
 
-      <script type="text/javascript">
-        
-      </script>
+        <div class="modal fade" id="matchModal" tabindex="-1" role="dialog" aria-labelledby="matchModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title">Best Match:</h3>
+                <hr>
+                </div>
+                <div class="modal-body">
+                    <h4 id="matchName"></h4>
+                    <img class="img-fluid" src="" id="matchImage">
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeButton">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+
+                    <h1 class="display-4">Shakespearean Friend Finder</h1>
+                    <hr>
+                    
+                    <form role="form">
+
+                        <h2 class="mb-3">About You</h2>
+                        <h4>Name (Required)</h4>
+                        <input class="form-control mb-3" type="text" id="name">
+                        <h4>Link to Photo Image (Required)</h4>
+                        <input class="form-control mb-3" type="text" id="image">
+
+                        <hr>
+
+                        <h2 class="my-4">Questions of Compatibility for the tragic or comedic:</h2>
+
+                        <h5>1. How will you win the love of your life?</h5>
+                        <select id="q1">
+                          <option value=""></option>
+                          <option value="1">Kidnap them</option>
+                          <option value="2">Kill their lover</option>
+                          <option value="3">Use your charm</option>
+                          <option value="4">Get them drunk</option>
+                          <option value="5">Get drunk yourself</option>
+                        </select>
+
+                        <h5>2. Where do you want to go on holiday?</h5>
+                        <select id="q2">
+                          <option value=""></option>
+                          <option value="1">Berlin</option>
+                          <option value="2">London</option>
+                          <option value="3">Paris</option>
+                          <option value="4">The dark recesses of my own mind</option>
+                          <option value="5">Barbados</option>
+                        </select>
+
+                        <h5>3. Pick a condiment</h5>
+                        <select id="q3">
+                          <option value=""></option>
+                          <option value="1">Mayonnaise</option>
+                          <option value="2">The blood of my enemies</option>
+                          <option value="3">Gin</option>
+                          <option value="4">Tobasco</option>
+                          <option value="5">English mustard</option>
+                        </select>
+
+                        <h5>4. Why are you sad?</h5>
+                        <select id="q4">
+                          <option value=""></option>
+                          <option value="1">Existential Crisis</option>
+                          <option value="2">Run out of alcohol</option>
+                          <option value="3">Treachery afoot in Rome</option>
+                          <option value="4">My lover doesn't know me</option>
+                          <option value="5">Keep killing people</option>
+                        </select>
+
+                        <h5>5. How will you die?</h5>
+                        <select id="q5">
+                          <option value=""></option>
+                          <option value="1">Poison</option>
+                          <option value="2">Stabbed in the back</option>
+                          <option value="3">Alone</option>
+                          <option value="4">Liver failure</option>
+                          <option value="5">Ending it myself</option>
+                        </select>
+
+                        <h5>6. How do you fight your enemies?</h5>
+                        <select id="q6">
+                          <option value=""></option>
+                          <option value="1">I run away</option>
+                          <option value="2">With my wit</option>
+                          <option value="3">Murder them and feel bad</option>
+                          <option value="4">I have no enemies</option>
+                          <option value="5">Poison them</option>
+                        </select>
+
+                        <h5>7. How do these question make you feel?</h5>
+                        <select id="q7">
+                          <option value=""></option>
+                          <option value="1">Ask my wife</option>
+                          <option value="2">Smug</option>
+                          <option value="3">Too drunk to say</option>
+                          <option value="4">Sexually aroused</option>
+                          <option value="5">Ask my mother</option>
+                        </select>
+                        <br>
+                        <button class="btn btn-success mt-4" type="submit" id="submitBtn">
+                            Submit
+                        </button>
+
+                        <hr>
+
+                    </form>
+                </div>
+            </div> <!-- end row -->
+            <div class="row">
+                <div class="col-sm">
+                    <a href="api/friends">API Friends List</a> | <a href="https://github.com/timwelsh/friend-finder">GitHub</a>
+                </div>
+            </div>
+        </div> <!-- end container -->
+
+        <script>
+            $("#submitBtn").on("click", function(event){
+                event.preventDefault();
+                const newSubmission = {
+                    name: $("#name").val().trim(),
+                    image: $("#image").val().trim(),
+                    q1: $("input[name=q1]:checked").val(),
+                    q2: $("input[name=q2]:checked").val(),
+                    q3: $("input[name=q3]:checked").val(),
+                    q4: $("input[name=q4]:checked").val(),
+                    q5: $("input[name=q5]:checked").val(),
+                    q6: $("input[name=q6]:checked").val(),
+                    q7: $("input[name=q7]:checked").val()
+                };
+                console.log(newSubmission);
+                $.post("/api/friends",newSubmission,function(data) {
+                    console.log(data);
+                    $("#matchName").text(data.matchName);
+                    $("#matchImage").attr("src",data.matchPhoto);
+                    $("#matchModal").modal(); 
+                });
+            });
+        </script>
     </body>
 </html>
