@@ -150,10 +150,10 @@
               }
                 console.log(newCharacter);
                 $.post("/api/friends", newCharacter, function(data) {
-                    console.log(data[0]);
-                    $("#matchName").text(data[0].name);
-                    $("#matchImage").attr("src", data[0].photo);
-                    $("#matchDesc").text(data[0].desc);
+                    console.log(data + " here is data ");
+                    $("#matchName").text(data.name);
+                    $("#matchImage").attr("src", data.photo);
+                    $("#matchDesc").text(data.desc);
                     $("#matchModal").modal(); 
                 });
             });
