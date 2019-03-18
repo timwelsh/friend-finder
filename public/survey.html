@@ -2,7 +2,8 @@
 <html>
     <head>
         <title>Shakespearean Friend Finder</title>
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script> -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -118,7 +119,7 @@
                           <option value="5">Ask my mother</option>
                         </select>
                         <br>
-                        <button class="btn btn-success mt-4" type="submit" id="submitBtn">
+                        <button class="btn btn-success mt-4" type="submit" id="submit">
                             Submit
                         </button>
 
@@ -135,9 +136,12 @@
         </div> <!-- end container -->
 
         <script>
-            $("#submitBtn").on("click", function(event) {
+            $("#submit").on("click", function() {
               event.preventDefault();
-              let newCharacter = {
+              // var name = $("#name").val().trim()
+              // var q1 = $("#q1").val();
+              // console.log(name + " here is name " + q1)
+              var newCharacter = {
                 name: $("#name").val().trim(),
                 image: $("#image").val().trim(),
                 q1: $("#q1").val(),
@@ -148,15 +152,24 @@
                 q6: $("#q6").val(),
                 q7: $("#q7").val()
               }
-                console.log(newCharacter);
-                $.post("/api/friends", newCharacter, function(data) {
-                    console.log(data + " here is data ");
-                    $("#matchName").text(data.name);
-                    $("#matchImage").attr("src", data.photo);
-                    $("#matchDesc").text(data.desc);
-                    $("#matchModal").modal(); 
-                });
-            });
+              console.log(newCharacter + " add this char")
+              $.ajax({
+                url: "/api/friends",
+                method: "post",
+                data: newCharacter
+              })
+              .done (function (data) {
+                console.log(data + " did I get data ")
+              })
+                // console.log(newCharacter);
+                // $.post("/api/friends", newCharacter, function(data) {
+                //     console.log(data + " here is data ");
+                //     $("#matchName").text(data.name);
+                //     $("#matchImage").attr("src", data.photo);
+                //     $("#matchDesc").text(data.desc);
+                //     $("#matchModal").modal(); 
+                // });
+            });  // end on click function
         </script>
     </body>
 </html>
